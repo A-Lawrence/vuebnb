@@ -38,7 +38,7 @@ var sample = {
   prices: [
     {
       title: 'Per night',
-      value: '$89'
+      value: '£89'
     },
     {
       title: 'Extra people',
