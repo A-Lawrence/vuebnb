@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Vuebnb</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/vue-style.css') }}" type="text/css">
 </head>
 <body>
 
@@ -15,11 +16,7 @@
 </div>
 
 <div id="app">
-    <div class="header">
-        <div class="header-img" v-bind:style="headerImageStyle" v-on:click="modalOpen = true">
-            <button class="view-photos">View Photos</button>
-        </div>
-    </div>
+    <header-image :image-url="images[0]" @header-clicked="openModal"></header-image>
     <div class="container">
         <h1>@{{ title }}</h1>
         <p>@{{ address }}</p>
@@ -35,35 +32,22 @@
             </button>
         </div>
         <div class="lists">
-            <hr/>
-            <div class="amenities list">
-                <div class="title"><strong>Amenities</strong></div>
-                <div class="content">
-                    <div class="list-item" v-for="amenity in amenities">
-                        <i class="fa fa-lg" v-bind:class="amenity.icon"></i>
-                        <span>@{{ amenity.title }}</span>
-                    </div>
-                </div>
-            </div>
-            <hr/>
-            <div class="prices list">
-                <div class="title"><strong>Prices</strong></div>
-                <div class="content">
-                    <div class="list-item" v-for="price in prices">
-                        @{{ price.title }}: <strong>@{{ price.value }}</strong>
-                    </div>
-                </div>
-            </div>
+            <feature-list title="Amenities" :items="amenities">
+                <template slot-scope="amenity">
+                    <i class="fa fa-lg" :class="amenity.icon"></i>
+                    <span>@{{ amenity.title }}</span>
+                </template>
+            </feature-list>
+            <feature-list title="Prices" :items="prices">
+                <template slot-scope="price">
+                    @{{ price.title }}: <strong>@{{ price.value }}</strong>
+                </template>
+            </feature-list>
         </div>
     </div>
-    <div id="modal" v-bind:class="{ show : modalOpen }">
-        <button v-on:click="modalOpen = false" class="modal-close">
-            &times;
-        </button>
-        <div class="modal-content">
-            <img v-bind:src="images[0]"/>
-        </div>
-    </div>
+    <modal-window ref="imagemodal">
+        <image-carousel :images="images"></image-carousel>
+    </modal-window>
 </div>
 
 <script type="text/javascript">
