@@ -54,18 +54,6 @@ hr {
     border-top: 1px solid #dce0e0;
 }
 
-.about {
-    margin-top: 2em;
-}
-
-.about h3 {
-    font-size: 22px;
-}
-
-.about p {
-    white-space: pre-wrap;
-}
-
 .list {
     display: flex;
     flex-wrap: nowrap;
@@ -103,37 +91,6 @@ hr {
     .list .list-item {
         flex: 0 0 100%;
     }
-}
-
-.about p.contracted {
-    height: 250px;
-    overflow: hidden;
-}
-
-button {
-    text-align: center;
-    vertical-align: middle;
-    user-select: none;
-    white-space: nowrap;
-    cursor: pointer;
-    display: inline-block;
-    margin-bottom: 0;
-}
-
-.about button.more {
-    background: transparent;
-    border: 0;
-    color: #008489;
-    padding: 0;
-    font-size: 17px;
-    font-weight: bold;
-}
-
-.about button.more:hover,
-.about button.more:focus,
-.about button.more:active {
-    text-decoration: underline;
-    outline: none;
 }
 
 button {
