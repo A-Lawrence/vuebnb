@@ -7,13 +7,19 @@
             </router-link>
         </div>
         <router-view></router-view>
+        <custom-footer></custom-footer>
     </div>
 </template>
 <script>
+    import CustomFooter from './CustomFooter.vue';
+
     export default {
         data() {
             return {}
-        }
+        },
+        components: {
+            CustomFooter,
+        },
     }
 </script>
 <style>
