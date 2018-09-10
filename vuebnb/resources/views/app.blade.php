@@ -10,18 +10,12 @@
 </head>
 <body>
 
-<div id="toolbar">
-    <img class="icon" src="{{ asset('images/logo.png') }}">
-    <h1>vuebnb</h1>
-</div>
-
 <div id="app">
     <listing-page></listing-page>
 </div>
 
 <script type="text/javascript">
-    window.vuebnb_listing_model = "{!! addslashes(json_encode($model)) !!}";
-    console.log(JSON.parse(window.vuebnb_listing_model));
+    window.vuebnb_server_data = "{!! addslashes(json_encode($data)) !!}";
 </script>
 
 <script src="{{ asset('js/app.js') }}"></script>
