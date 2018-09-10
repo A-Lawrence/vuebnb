@@ -1,35 +1,33 @@
 <template>
-    <div>
-        <div v-for="(group, country) in listing_groups">
-            <h1>Places in {{ country }}</h1>
-            <div class="listing-summaries">
-                <listing-summary
-                        v-for="listing in group"
-                        :key="listing.id"
-                        :listing="listing"
-                ></listing-summary>
-            </div>
-        </div>
+    <div class="home-container">
+        <listing-summary-group
+                v-for="(group, country) in listing_groups"
+                :key="country"
+                :listings="group"
+                :country="country"
+                class="listing-summary-group"
+        ></listing-summary-group>
     </div>
 </template>
 <script>
-    import {groupByCountry} from '../helpers';
-    import ListingSummary from './ListingSummary.vue';
-
-    let serverData = JSON.parse(window.vuebnb_server_data);
-    let listing_groups = groupByCountry(serverData.listings);
+    import routeMixin from '../route-mixin';
+    import ListingSummaryGroup from './ListingSummaryGroup.vue';
+    import { groupByCountry } from '../helpers';
 
     export default {
+        mixins: [ routeMixin ],
         data() {
             return {
-                listing_groups,
-            }
+                listing_groups: []
+            };
+        },
+        methods: {
+            assignData({ listings }) {
+                this.listing_groups = groupByCountry(listings);
+            },
         },
         components: {
-            ListingSummary,
+            ListingSummaryGroup
         }
     }
 </script>
-<style>
-
-</style>
