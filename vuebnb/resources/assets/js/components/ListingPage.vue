@@ -1,10 +1,12 @@
 <template>
     <div>
-        <header-image v-if="images[0]" :image-url="images[0]" @header-clicked="openModal"></header-image>
+        <header-image v-if="images[0]" :image-url="images[0]" @header-clicked="openModal":id="id"></header-image>
         <div class="listing-container">
-            <h1>{{ title }}</h1>
-            <p>{{ address }}</p>
-            <hr/>
+            <div class="heading">
+                <h1>{{ title }}</h1>
+                <p>{{ address }}</p>
+            </div>
+            <hr>
             <div class="about">
                 <h3>About this listing</h3>
                 <expandable-text>{{ about }}</expandable-text>
@@ -30,37 +32,42 @@
 </template>
 <script>
     import routeMixin from '../route-mixin';
-    import {populateAmenitiesAndPrices} from '../helpers';
+    import { populateAmenitiesAndPrices } from '../helpers';
 
-    let serverData = JSON.parse(window.vuebnb_server_data);
-    serverData = populateAmenitiesAndPrices(serverData.listing);
-
-    import HeaderImage from './HeaderImage.vue';
-    import ModalWindow from './ModalWindow.vue';
     import ImageCarousel from './ImageCarousel.vue';
+    import ModalWindow from './ModalWindow.vue';
     import FeatureList from './FeatureList.vue';
+    import HeaderImage from './HeaderImage.vue';
     import ExpandableText from './ExpandableText.vue';
 
     export default {
-        mixins: [routeMixin],
+        mixins: [ routeMixin ],
         data() {
-            return Object.assign(serverData, {});
+            return {
+                id: null,
+                title: null,
+                about: null,
+                address: null,
+                amenities: [],
+                prices: [],
+                images: []
+            }
         },
         components: {
-            HeaderImage,
             ImageCarousel,
-            ExpandableText,
-            FeatureList,
             ModalWindow,
+            FeatureList,
+            HeaderImage,
+            ExpandableText
         },
         methods: {
-            openModal() {
-                this.$refs.imagemodal.modalOpen = true;
-            },
-            assignData({listing}) {
+            assignData({ listing }) {
                 Object.assign(this.$data, populateAmenitiesAndPrices(listing));
             },
-        },
+            openModal() {
+                this.$refs.imagemodal.modalOpen = true;
+            }
+        }
     }
 </script>
 <style>
@@ -70,9 +77,5 @@
 
     .about h3 {
         font-size: 22px;
-    }
-
-    .about p {
-        white-space: pre-wrap;
     }
 </style>
