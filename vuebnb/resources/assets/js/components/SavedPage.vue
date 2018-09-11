@@ -1,0 +1,48 @@
+<template>
+    <div id="saved" class="home-container">
+        <h2>Saved listings</h2>
+        <div v-if="listings.length" class="listing-summaries">
+            <listing-summary
+                    v-for="listing in listings"
+                    :listing="listing"
+                    :key="listing.id"
+            ></listing-summary>
+        </div>
+        <div v-else>No saved listings.</div>
+    </div>
+</template>
+<script>
+    import ListingSummary from './ListingSummary.vue';
+
+    export default {
+        data() {
+            return {}
+        },
+        computed: {
+            listings() {
+                return this.$store.state.listing_summaries.filter(
+                    listing => this.$store.state.saved.indexOf(listing.id) > -1
+                );
+            },
+        },
+        components: {
+            ListingSummary,
+        },
+    }
+</script>
+<style>
+    #saved .listing-summaries {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: left;
+        overflow: hidden;
+    }
+
+    #saved .listing-summaries .listing-summary {
+        padding-bottom: 30px;
+    }
+
+    .listing-summaries > .listing-summary {
+        margin-right: 15px;
+    }
+</style>
