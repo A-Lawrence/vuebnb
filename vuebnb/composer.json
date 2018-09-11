@@ -56,7 +56,7 @@
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
             "php artisan migrate --seed",
-            "php artisan passport:install",
+            "php artisan passport:install"
         ]
     },
     "config": {
