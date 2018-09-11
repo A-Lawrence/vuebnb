@@ -55,7 +55,7 @@
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
-            "php artisan migrate --seed",
+            "php artisan migrate --seed --force -n",
             "php artisan passport:install"
         ]
     },
