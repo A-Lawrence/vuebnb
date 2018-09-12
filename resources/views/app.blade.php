@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Vuebnb</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/vue-style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/style.css', true) }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/vue-style.css', true) }}" type="text/css">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
     window.csrf_token = "{{ csrf_token() }}";
 </script>
 
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/app.js', true) }}"></script>
 
 </body>
 </html>
